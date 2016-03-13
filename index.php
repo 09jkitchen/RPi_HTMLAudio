@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>TestTunes</title>
+<title>HTML Tunes</title>
 </head>
 <body>
 
+<table style="vertical-align:middle">
+<tr>
+<td>
 <audio id="myAudio" onended="randSong()" controls>
   <source src="" type="audio/mpeg">
 </audio>
+</td><td>
 <button type="button" onclick="randSong()">Shuffle</button>
+</td></tr></table>
 <br>
 Now Playing:<span id="songTitle">SONG TITLE</span>
 <div style="height:700px;overflow:auto">
@@ -21,8 +26,10 @@ echo "Number of songs:<span id=\"numSongs\">$nums<span>";
 $count = 0;
 foreach ($songs as $song) {
    $count += 1;
-   echo '<tr><td><span id="'.$count.'" onclick="loadSong(\''.$song.'\')">'.$song.'</span></td></tr>';
-   }
+   $song = addslashes($song);
+// echo '<tr><td><span id="'.$count.'" onclick="loadSong(\''.$song.'\')">'.$song.'</span></td></tr>';
+   echo '<tr onclick="loadSong(\''.$song.'\')"><td><span id="'.$count.'">'.$song.'</span></td></tr>'; 
+}
 ?>
 </table>
 </div>
