@@ -2,6 +2,11 @@
 <html>
 <head>
 <title>HTML Tunes</title>
+<style>
+span {
+	color: blue;
+}
+</style>
 </head>
 <body>
 
@@ -14,32 +19,36 @@
 </td><td>
 <button type="button" onclick="randSong()">Shuffle</button>
 </td></tr></table>
+Now Playing:<span id="songTitle" style="color:black">SONG TITLE</span>
 <br>
-Now Playing:<span id="songTitle">SONG TITLE</span>
 <div style="height:700px;overflow:auto">
 <table border=1>
 <?php
 
-$songs = glob("usbdrv/Music/*.mp3");
+$mp3s = glob("usbdrv/Music/*.mp3");
+$m4as = glob("usbdrv/Music/*.m4a");
+$songs = array_merge($mp3s, $m4as);
+sort($songs);
 $nums = sizeof($songs);
-echo "Number of songs:<span id=\"numSongs\">$nums<span>";
+echo "Number of songs:<span id=\"numSongs\" style=\"color:black\">$nums<span>";
 $count = 0;
 foreach ($songs as $song) {
    $count += 1;
    $song = addslashes($song);
 // echo '<tr><td><span id="'.$count.'" onclick="loadSong(\''.$song.'\')">'.$song.'</span></td></tr>';
-   echo '<tr onclick="loadSong(\''.$song.'\')"><td><span id="'.$count.'">'.$song.'</span></td></tr>'; 
+   echo '<tr onclick="loadSong('.$count.',\''.$song.'\')"><td><span id="'.$count.'">'.$song.'</span></td></tr>'; 
 }
 ?>
 </table>
 </div>
 <script>
   var aud = document.getElementById("myAudio"); 
-  function loadSong(name) {
+  function loadSong(id, name) {
     aud.src = name;
     aud.load();
     aud.play();
     document.getElementById("songTitle").innerText = name;
+    document.getElementById(id).style.color = "purple";
   }
   function randSong () {
     var max = document.getElementById("numSongs").innerText;
@@ -48,6 +57,7 @@ foreach ($songs as $song) {
     aud.load();
     aud.play();
     document.getElementById("songTitle").innerText = document.getElementById(rndm).innerText;
+    document.getElementById(rndm).style.color = "purple";
   }
 </script>
 
