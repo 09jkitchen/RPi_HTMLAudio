@@ -34,9 +34,10 @@ echo "Number of songs:<span id=\"numSongs\" style=\"color:black\">$nums<span>";
 $count = 0;
 foreach ($songs as $song) {
    $count += 1;
+   $songO = $song;
    $song = addslashes($song);
 // echo '<tr><td><span id="'.$count.'" onclick="loadSong(\''.$song.'\')">'.$song.'</span></td></tr>';
-   echo '<tr onclick="loadSong('.$count.',\''.$song.'\')"><td><span id="'.$count.'">'.$song.'</span></td></tr>'; 
+   echo '<tr onclick="loadSong('.$count.',\''.$song.'\')"><td><span id="'.$count.'">'.$songO.'</span></td></tr>'; 
 }
 ?>
 </table>
