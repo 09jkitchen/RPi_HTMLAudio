@@ -1,6 +1,15 @@
-Tested on Raspberry Pi 2 with a lighttp server and PHP5.
 Also tested on Raspberry Pi 3 running Apache2 and PHP5.
 
+Static ip:
+sudo nano /etc/network/interfaces
+	auto eth0
+	iface eth0 inet static
+	address 192.168.0.220
+	netmask 255.255.255.0
+	netowrk 192.168.0.0
+	broadcast 192.168.0.255
+	gateway 192.168.0.1
+	
 Apache2: sudo apt-get install apache2 -y
 PHP5: sudo apt-get install php5 libapache2-mod-php5 -y
 
