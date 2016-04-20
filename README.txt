@@ -1,3 +1,4 @@
+Tested on Raspberry Pi 2 with a Apache2 (or lighttp) server and PHP5.
 Also tested on Raspberry Pi 3 running Apache2 and PHP5.
 
 Static ip:
