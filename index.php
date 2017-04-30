@@ -20,7 +20,7 @@ span {
 <button type="button" id="reload" onclick="reload()">Reload</button>
 <button type="button" id="shuffle" onclick="randSong()">Shuffle</button>
 </td></tr></table>
-<progress id="myProgress" value="0" max="100"></progress> <br>
+<progress id="myProgress" value="0" max="100"></progress> <span id="percentage">0%</span><br>
 Now Playing:<span id="songTitle" style="color:black">SONG TITLE</span>   <span id="buffer" style="color:black">Buffering</span>
 <br>
 <div style="height:700px;overflow:auto">
@@ -61,6 +61,7 @@ foreach ($songs as $song) {
 	  var z = aud.buffered.end(aud.buffered.length-1);
 	  var loaded = ((z / duration)*100).toFixed(0);
 	  prog.value = loaded;
+	  document.getElementById("percentage").innerText = loaded.toString() + "%";
 	  if (z == duration)
 	  {
 		  document.getElementById("buffer").innerText = "Finished Buffering";
@@ -74,15 +75,13 @@ foreach ($songs as $song) {
 	  document.getElementById("songTitle").innerText = name;
 	  document.getElementById(id).style.color = "purple";
 	  document.getElementById("buffer").innerText="Buffering";
+	  prog.value = 0;
   }
   function randSong () {
 	  var max = document.getElementById("numSongs").innerText;
 	  var rndm = Math.floor(Math.random() * max) + 1;
-	  aud.src = document.getElementById(rndm).innerText;
-	  aud.load();
-	  document.getElementById("songTitle").innerText = document.getElementById(rndm).innerText;
-	  document.getElementById(rndm).style.color = "purple";
-	  document.getElementById("buffer").innerText = "Buffering";
+	  var name = document.getElementById(rndm).innerText;
+	  loadSong(rndm, name);
   }
 
   function reload() {
